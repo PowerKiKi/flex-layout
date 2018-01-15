@@ -32,6 +32,9 @@ import {ClassDirective} from './api/ext/class';
 import {StyleDirective} from './api/ext/style';
 import {ImgSrcDirective} from './api/ext/img-src';
 
+import {BROWSER_PROVIDER} from './utils/styling/browser-provider';
+import {StyleService} from './utils/styling/styler';
+
 /**
  * Since the equivalent results are easily achieved with a css class attached to each
  * layout child, these have been deprecated and removed from the API.
@@ -65,7 +68,9 @@ const ALL_DIRECTIVES = [
   providers: [
     MEDIA_MONITOR_PROVIDER,
     DEFAULT_BREAKPOINTS_PROVIDER,   // Extend defaults with internal custom breakpoints
-    OBSERVABLE_MEDIA_PROVIDER
+    OBSERVABLE_MEDIA_PROVIDER,
+    StyleService,
+    BROWSER_PROVIDER,
   ]
 })
 export class FlexLayoutModule {
@@ -77,7 +82,7 @@ export class FlexLayoutModule {
    * the API directives to support extra selectors for the orientations breakpoints !!
    */
   static provideBreakPoints(breakpoints: BreakPoint[],
-                            options ?: BreakPointProviderOptions): ModuleWithProviders {
+                            options?: BreakPointProviderOptions): ModuleWithProviders {
     return {
       ngModule: FlexLayoutModule,
       providers: [
